@@ -1,0 +1,513 @@
+{
+	"info": {
+		"_postman_id": "d285e6e2-9264-4983-8dab-0976245c273c",
+		"name": "04-ProductAPI,Tests ,Variables con Flujo Completo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29551877"
+	},
+	"item": [
+		{
+			"name": "V1",
+			"item": [
+				{
+					"name": "CREATE product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"sku_created\", jsonResponse.sku);\r",
+									"\r",
+									"pm.test(\"La solicitud POST fue completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El código de estado de la respuesta es Creado\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El producto fue creado con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta presenta un esquema JSON valido\", () =>{\r",
+									"    const validSchema = {\r",
+									"        \"type\":\"object\",\r",
+									"        \"properties\":{\r",
+									"            \"sku\":{\"type\":\"string\"},\r",
+									"            \"status\": {\"type\":\"boolean\"},\r",
+									"            \"message\": {\"type\":\"string\"}\r",
+									"        },\r",
+									"        \"required\":[\"sku\",\"status\",\"message\"]\r",
+									"    };\r",
+									"    pm.response.to.have.jsonSchema(validSchema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 800ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{name}}\",\r\n    \"description\":\"{{description}}\",\r\n    \"price\":{{price}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v1/product/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"La solicitud PUT fue completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El codigo de estado de la respuesta es OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El producto fue actualizado con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{name_updated}}\",\r\n    \"description\":\"{{description_updated}}\",\r\n    \"price\":{{price_updated}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v1/product/{{sku_created}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{sku_created}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE product price",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"La solicitud PATCH fue completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El codigo de estado de la respuesta es OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El precio del producto fue actualizado con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{content_no_updatable}}\",\r\n    \"description\":\"{{content_no_updatable}}\",\r\n    \"price\":{{price_only_update}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v1/product/{{sku_created}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{sku_created}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"La solicitud GET completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El código de estado de la respuesta es OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El estado de la consulta fue exitoso!\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La cantidad de productos es mayor a 0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/v1/product/?name=Iphone 15 redx",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Iphone 15 redx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET product by sku",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"La solicitud GET fue completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);//Preferido\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El código de estado de la respuesta es OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La consulta fue completa con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El producto fue encontrado!\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/v1/product/{{sku_created}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{sku_created}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE product by sku",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"La solicitud DELETE fue completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El codigo de estado de la respuesta es OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El producto fue eliminado con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/v1/product/{{sku_created}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"{{sku_created}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "V2",
+			"item": [
+				{
+					"name": "CREATE product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"const newSku = jsonResponse.products[0].sku;\r",
+									"console.log(newSku);\r",
+									"postman.setEnvironmentVariable(\"sku_created\", newSku);\r",
+									"\r",
+									"pm.test(\"La solicitud POST fue completada con exito\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El código de estado de la respuesta es Creado\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El producto fue creado con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El producto fue creado con exito\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.products.length).to.equal(1);\r",
+									"    pm.expect(jsonData.status).to.eql(true);\r",
+									"    var product = jsonData.products[0];\r",
+									"    pm.expect(product.name).to.be.a(\"string\");\r",
+									"    pm.expect(product.sku).to.be.a(\"string\");\r",
+									"    pm.expect(product.description).to.be.a(\"string\");\r",
+									"    pm.expect(product.price).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"El tiempo de respuesta es menor a 800ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+									"});\r",
+									"\r",
+									"var getProductUrl = \"http://localhost:8081/api/v1/product/\";\r",
+									"pm.test(\"Llamar a url extenas\", function () {\r",
+									"    pm.sendRequest(getProductUrl+newSku+\"/\", function (err, response) {\r",
+									"        console.log(response.json());\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{name}}\",\r\n    \"description\":\"{{description}}\",\r\n    \"price\":{{price}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/api/v2/product/",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v2",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": "Iphone 15",
+			"type": "string"
+		},
+		{
+			"key": "description",
+			"value": "This is a initial description",
+			"type": "string"
+		},
+		{
+			"key": "price",
+			"value": "999",
+			"type": "string"
+		},
+		{
+			"key": "sku_created",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "name_updated",
+			"value": "Iphone 15 red",
+			"type": "string"
+		},
+		{
+			"key": "description_updated",
+			"value": "This is a updated description",
+			"type": "string"
+		},
+		{
+			"key": "price_updated",
+			"value": "1200",
+			"type": "string"
+		},
+		{
+			"key": "content_no_updatable",
+			"value": "LOREIPSUM",
+			"type": "string"
+		},
+		{
+			"key": "price_only_update",
+			"value": "1900",
+			"type": "string"
+		}
+	]
+}
