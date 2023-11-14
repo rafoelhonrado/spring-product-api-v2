@@ -1,7 +1,7 @@
-# API Services Demo
+# API Rest Demo
 
 Aplicacion Spring Boot creada para probar servicios API con diferentes bibliotecas y herramientas de Software.
-Si encuentra algun problema al clonar el proyecto debe ejecutar la opción Maven -> Update Project desde el Spring Tool Suite.
+Si encuentra algun problema al clonar el proyecto debe ejecutar la opciÃ³n Maven -> Update Project desde el Spring Tool Suite.
 
 ## Trabajo Practico
 Importar el archivo [04-ProductAPI,Tests ,Variables con Flujo Completo.postman_collection.json](product-api-service/src/main/resources/04-ProductAPI,Tests ,Variables con Flujo Completo.postman_collection.json)
