@@ -31,7 +31,7 @@ jobs:
       run: pwd
     - name: Build with Maven
       #run: mvn -B package --file pom.xml
-      run: mvn deploy
+      run: mvn spring-boot:run
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
