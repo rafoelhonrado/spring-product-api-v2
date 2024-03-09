@@ -79,6 +79,7 @@ jobs:
         to: rafoelhonrado@hotmail.com
         from: admin@test.com
         body: Este es un mensaje de confirmacion de las pruebas
+        attachments: attachments.zip,git.diff,./testing/product-api-service-karate/target/karate-reports/results.zip
 
 
               
