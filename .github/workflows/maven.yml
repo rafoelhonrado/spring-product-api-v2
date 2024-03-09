@@ -24,9 +24,15 @@ jobs:
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
+        path: api
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+      with:
+        repository: rafoelhornado/testing-spring-api-rest-karate
+        path: testing
     - name: View Current Directory
       run: pwd; ls; 
     - name: Set directory
@@ -37,8 +43,4 @@ jobs:
       #run: mvn -B package --file pom.xml
       run: mvn spring-boot:run
       working-directory: ./product-api-service
-    - name: Checkout tools repo
-      uses: actions/checkout@v4
-      with:
-        repository: rafoelhornado/testing-spring-api-rest-karate
-        path: testing
+
