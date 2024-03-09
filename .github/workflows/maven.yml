@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     environment: spring-1
     steps:
@@ -69,7 +68,7 @@ jobs:
         # Subject of mail message
         subject: Pruebas completadas
         # Recipients mail addresses (separated with comma)
-        to: rafoelhonrado@hotmail.com
+        to: bryanalexfreire@gmail.com
         from: admin@test.com
         body: Este es un mensaje de confirmacion de las pruebas
         attachments: attachments.zip,git.diff,./testing/product-api-service-karate/target/karate-reports/results.zip
