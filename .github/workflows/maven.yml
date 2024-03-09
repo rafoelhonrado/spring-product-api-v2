@@ -73,7 +73,7 @@ jobs:
         # Authenticate as this user to SMTP server
         username: prueba00001@grupoinmobiliariosanisidro.com
         # Authenticate with this password to SMTP server
-        password: ${{ secrets.email_pass }}
+        password: $LY7_5sUF=Ma
         # Subject of mail message
         subject: Pruebas completadas
         # Recipients mail addresses (separated with comma)
