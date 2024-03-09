@@ -40,14 +40,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn spring-boot:run
+      run: nohup mvn spring-boot:run &
       working-directory: ./main/product-api-service
     - name: Run with Maven
       run: mvn test
       working-directory: ./testing/product-api-service-karate
-    - name: Build with Maven
-      run: mvn spring-boot:stop
-      working-directory: ./main/product-api-service
 
       
 
