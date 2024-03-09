@@ -27,15 +27,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: View Current Directory
+      run: pwd; ls; 
+    - name: make test directory
+      run: mkdir testing 
     - name: Checkout tools repo
       uses: actions/checkout@v4
       with:
         repository: rafoelhornado/testing-spring-api-rest-karate
         path: testing
-    - name: View Current Directory
-      run: pwd; ls; 
-    - name: Set directory
-      run: cd product-api-service
     - name: View Current Directory
       run: pwd; ls; 
     - name: Build with Maven
