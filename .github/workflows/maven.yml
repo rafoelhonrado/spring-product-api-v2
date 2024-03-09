@@ -34,7 +34,9 @@ jobs:
     - name: View Current Directory
       run: pwd; ls; 
     - name: Build with Maven
-      #run: mvn -B package --file pom.xml
       run: mvn spring-boot:run
-      working-directory: ./product-api-service
+      working-directory: ./main/product-api-service
+    - name: Build with Maven
+      run: mvn test
+      working-directory: ./main/product-api-service
 
