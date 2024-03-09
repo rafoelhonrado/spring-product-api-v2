@@ -60,6 +60,7 @@ jobs:
         type: zip
     - name: View Current Directory
       run: pwd; ls;
+      working-directory: ./testing/product-api-service-karate/target/karate-reports
           
           
       
