@@ -79,7 +79,7 @@ jobs:
         # Recipients mail addresses (separated with comma)
         to: rafoelhonrado@hotmail.com
         from: admin@test.com
-        body: Este es un mensaje de confirmacion de las pruebas!
+        body: Este es un mensaje de confirmacion de las pruebas
 
 
               
