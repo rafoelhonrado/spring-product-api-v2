@@ -27,9 +27,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: View Current Directory
+      run: pwd; ls; 
     - name: Set directory
-      run: pwd; ls; cd product-api-service
-     
+      run: cd product-api-service
+    - name: View Current Directory
+      run: pwd; ls; 
     - name: Build with Maven
       #run: mvn -B package --file pom.xml
       run: mvn spring-boot:run
