@@ -58,7 +58,8 @@ jobs:
         directory: ./testing/product-api-service-karate/target/karate-reports
         # Tool to use for archiving
         type: zip
-
+    - name: View Current Directory
+      run: pwd; ls;
           
           
       
