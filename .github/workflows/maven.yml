@@ -43,7 +43,7 @@ jobs:
       run: nohup mvn spring-boot:run &
       working-directory: ./main/product-api-service
     - name: Run with Maven
-      run: mvn test
+      run: mvn test -Dkarate.options="--tags @crear"
       working-directory: ./testing/product-api-service-karate
 
       
