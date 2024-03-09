@@ -61,7 +61,28 @@ jobs:
     - name: View Current Directory
       run: pwd; ls;
       working-directory: ./testing/product-api-service-karate/target/karate-reports
-          
+    - name: Send email
+      # You may pin to the exact commit or the version.
+      # uses: dawidd6/action-send-mail@4226df7daafa6fc901a43789c49bf7ab309066e7
+      uses: dawidd6/action-send-mail@v3.11.0
+      with:
+        # SMTP server address
+        server_address: ${{secrets.EMAIL_SERVER}}
+        server_port: 465
+        secure: true
+        # Authenticate as this user to SMTP server
+        username: ${{secrets.EMAIL_USERNAME}}
+        # Authenticate with this password to SMTP server
+        password: ${{secrets.EMAIL_PASSWORD}}
+        # Subject of mail message
+        subject: Pruebas completadas
+        # Recipients mail addresses (separated with comma)
+        to: rafoelhonrado@hotmail.com
+        from: admin@test.com
+        body: Este es un mensaje de confirmacion de las pruebas
+
+
+              
           
       
 
