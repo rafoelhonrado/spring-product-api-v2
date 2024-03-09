@@ -71,9 +71,9 @@ jobs:
         server_port: 465
         secure: true
         # Authenticate as this user to SMTP server
-        username: ${{secrets.EMAIL_USERNAME}}
+        username: ${{ prueba00001@grupoinmobiliariosanisidro.com }}
         # Authenticate with this password to SMTP server
-        password: ${{secrets.EMAIL_PASSWORD}}
+        password: ${{ secrets.EMAIL_PASSWORD }}
         # Subject of mail message
         subject: Pruebas completadas
         # Recipients mail addresses (separated with comma)
